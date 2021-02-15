@@ -59,4 +59,8 @@ module ShopifyApp
   require 'shopify_app/session/session_storage'
   require 'shopify_app/session/shop_session_storage'
   require 'shopify_app/session/user_session_storage'
+
+  # scopes
+  require 'shopify_app/scopes/shop_access_scopes_strategy'
+  require 'shopify_app/scopes/user_access_scopes_strategy'
 end

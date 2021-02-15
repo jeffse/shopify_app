@@ -9,14 +9,17 @@ module ShopifyApp
     attr_accessor :secret
     attr_accessor :old_secret
     attr_accessor :scope
-    attr_accessor :shop_access_scopes
-    attr_accessor :user_access_scopes
+    attr_writer :shop_access_scopes
+    attr_writer :user_access_scopes
     attr_accessor :embedded_app
     alias_method  :embedded_app?, :embedded_app
     attr_accessor :webhooks
     attr_accessor :scripttags
     attr_accessor :after_authenticate_job
     attr_accessor :api_version
+
+    attr_accessor :shop_access_scopes_strategy
+    attr_accessor :user_access_scopes_strategy
 
     # customise urls
     attr_accessor :root_url
@@ -50,6 +53,9 @@ module ShopifyApp
       @webhooks_manager_queue_name = Rails.application.config.active_job.queue_name
       @disable_webpacker = ENV['SHOPIFY_APP_DISABLE_WEBPACKER'].present?
       @allow_cookie_authentication = true
+
+      @shop_access_scopes_strategy = ShopifyApp::ShopAccessScopesStrategy
+      @user_access_scopes_strategy = ShopifyApp::UserAccessScopesStrategy
     end
 
     def login_url
